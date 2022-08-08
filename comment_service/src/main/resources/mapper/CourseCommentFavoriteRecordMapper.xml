@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gl.mapper.CourseCommentFavoriteRecordMapper">
+    <select id="selectFavoriteByCommentId" parameterType="java.lang.Integer" resultType="CourseCommentFavoriteRecord">
+        select * from course_comment_favorite_record where comment_id = #{commentId};
+    </select>
+</mapper>

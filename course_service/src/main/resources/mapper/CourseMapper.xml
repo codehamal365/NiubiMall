@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gl.mapper.CourseMapper">
+    <resultMap id="courseMap" type="Course" autoMapping="true">
+        <id column="c_id" property="id"></id>
+        <result column="course_name" property="courseName"></result>
+        <result column="brief" property="brief"></result>
+        <result column="price" property="price"></result>
+        <result column="price_tag" property="priceTag"></result>
+        <result column="discounts" property="discounts"></result>
+        <result column="discounts_tag" property="discountsTag"></result>
+        <result column="course_description_mark_down" property="courseDescriptionMarkDown"></result>
+        <result column="course_description" property="courseDescription"></result>
+        <result column="course_img_url" property="courseImgUrl"></result>
+        <result column="is_new" property="isNew"></result>
+        <result column="is_new_des" property="isNewDes"></result>
+        <result column="last_operator_id" property="lastOperatorId"></result>
+        <result column="auto_online_time" property="autoOnlineTime"></result>
+        <result column="c_create_time" property="createTime"></result>
+        <result column="c_update_time" property="updateTime"></result>
+        <result column="c_is_del" property="isDel"></result>
+        <result column="total_duration" property="totalDuration"></result>
+        <result column="c_status" property="status"></result>
+        <result column="sort_num" property="sortNum"></result>
+        <result column="preview_first_field" property="previewFirstField"></result>
+        <result column="preview_second_field" property="previewSecondField"></result>
+        <result column="sales" property="sales"></result>
+        <result column="type_id" property="typeId"></result>
+        <result column="orientation_id" property="orientationId"></result>
+        <result column="teacher_id" property="teacherId"></result>
+
+        <association property="teacher" javaType="Teacher">
+            <id column="t_id" property="id"></id>
+            <result column="teacher_name" property="teacherName"></result>
+            <result column="t_position" property="position"></result>
+            <result column="t_description" property="description"></result>
+            <result column="t_create_time" property="createTime"></result>
+            <result column="t_update_time" property="updateTime"></result>
+            <result column="t_is_del" property="isDel"></result>
+        </association>
+
+        <association property="courseType" javaType="CourseType">
+            <id column="ct_id" property="id"></id>
+            <result column="type_name" property="typeName"></result>
+        </association>
+
+        <association property="courseOrientation" javaType="CourseOrientation">
+            <id column="co_id" property="id"></id>
+            <result column="co_orientation_name" property="orientationName"></result>
+            <result column="co_parent_id" property="parentId"></result>
+            <association property="parent" javaType="CourseOrientation">
+                <id column="po_id" property="id"></id>
+                <result column="po_orientation_name" property="orientationName"></result>
+                <result column="po_parent_id" property="parentId"></result>
+            </association>
+        </association>
+
+        <collection property="courseActivities" javaType="java.util.List" ofType="CourseActivity">
+            <id column="ca_id" property="id"></id>
+            <result column="ca_course_id" property="courseId"></result>
+            <result column="ca_begin_time" property="beginTime"></result>
+            <result column="ca_end_time" property="endTime"></result>
+            <result column="amount" property="amount"></result>
+            <result column="stock" property="stock"></result>
+            <result column="ca_status" property="status"></result>
+            <result column="ca_is_del" property="isDel"></result>
+            <result column="remark" property="remark"></result>
+            <result column="ca_create_time" property="createTime"></result>
+            <result column="ca_update_time" property="updateTime"></result>
+        </collection>
+
+        <collection property="courseSections" javaType="java.util.List" ofType="CourseSection">
+            <id column="cs_id" property="id"></id>
+            <result column="cs_course_id" property="courseId"></result>
+            <result column="section_name" property="sectionName"></result>
+            <result column="description" property="description"></result>
+            <result column="cs_create_time" property="createTime"></result>
+            <result column="cs_update_time" property="updateTime"></result>
+            <result column="cs_is_del" property="isDel"></result>
+            <result column="cs_order_num" property="orderNum"></result>
+            <result column="cs_status" property="status"></result>
+
+            <collection property="courseLessons" javaType="java.util.List" ofType="CourseLesson">
+                <id column="cl_id" property="id"></id>
+                <result column="cl_course_id" property="courseId"></result>
+                <result column="cl_section_id" property="sectionId"></result>
+                <result column="theme" property="theme"></result>
+                <result column="cl_duration" property="duration"></result>
+                <result column="is_free" property="isFree"></result>
+                <result column="cl_create_time" property="createTime"></result>
+                <result column="cl_update_time" property="updateTime"></result>
+                <result column="cl_is_del" property="isDel"></result>
+                <result column="cl_order_num" property="orderNum"></result>
+                <result column="cl_status" property="status"></result>
+
+                <association property="courseMedia" javaType="CourseMedia">
+                    <id column="cm_id" property="id"></id>
+                    <result column="cm_course_id" property="courseId"></result>
+                    <result column="cm_section_id" property="sectionId"></result>
+                    <result column="cm_lesson_id" property="lessonId"></result>
+                    <result column="cover_image_url" property="coverImageUrl"></result>
+                    <result column="cm_duration" property="duration"></result>
+                    <result column="file_edk" property="fileEdk"></result>
+                    <result column="file_size" property="fileSize"></result>
+                    <result column="file_name" property="fileName"></result>
+                    <result column="file_dk" property="fileDk"></result>
+                    <result column="cm_create_time" property="createTime"></result>
+                    <result column="cm_update_time" property="updateTime"></result>
+                    <result column="cm_is_del" property="isDel"></result>
+                    <result column="cm_duration_num" property="durationNum"></result>
+                    <result column="cm_file_id" property="fileId"></result>
+                </association>
+            </collection>
+
+        </collection>
+
+
+    </resultMap>
+
+
+    <select id="selectCoursePages" resultMap="courseMap">
+        select c.id c_id,course_name,brief,price,price_tag,discounts,discounts_tag,course_description_mark_down,course_description,course_img_url,is_new,is_new_des,last_operator_id,auto_online_time, c.create_time c_create_time,c.update_time c_update_time,c.is_del c_is_del,total_duration,c.`status` c_status,sort_num,preview_first_field,preview_second_field,sales,type_id,orientation_id,teacher_id,
+
+        t.id t_id,t.teacher_name,t.position t_position,t.description t_description,t.create_time t_create_time,t.update_time t_update_time,t.is_del t_is_del,
+
+        ct.id ct_id,ct.type_name,
+
+        co.id co_id,co.orientation_name co_orientation_name,co.parent_id co_parent_id,
+
+        po.id po_id,po.orientation_name po_orientation_name,po.parent_id po_parent_id,
+
+        ca.id ca_id,ca.course_id ca_course_id,ca.begin_time ca_begin_time,ca.end_time ca_end_time,ca.amount,ca.stock,ca.`status` ca_status,ca.is_del ca_is_del,ca.remark,ca.create_time ca_create_time,ca.update_time ca_update_time,
+
+        cs.id cs_id,cs.course_id cs_course_id,cs.section_name,cs.description,cs.create_time cs_create_time,cs.update_time cs_update_time,cs.is_del cs_is_del,cs.order_num cs_order_num,cs.`status` cs_status,
+
+        cl.id cl_id,cl.course_id cl_course_id,cl.section_id cl_section_id,cl.theme,cl.duration cl_duration,cl.is_free,cl.create_time cl_create_time,cl.update_time cl_update_time,cl.is_del cl_is_del,cl.order_num cl_order_num,cl.`status` cl_status,
+
+        cm.id cm_id,cm.course_id cm_course_id,cm.section_id cm_section_id,cm.lesson_id cm_lesson_id,cm.cover_image_url,
+        cm.duration cm_duration,cm.file_edk,cm.file_size,cm.file_name,cm.file_dk,cm.create_time cm_create_time,cm.update_time cm_update_time,cm.is_del cm_is_del,cm.duration_num cm_duration_num,cm.file_id cm_file_id
+
+        from course c
+        left JOIN teacher t
+        on c.teacher_id = t.id
+        LEFT JOIN course_type ct
+        on c.type_id = ct.id
+        LEFT JOIN course_orientation co
+        on c.orientation_id = co.id
+        LEFT JOIN course_orientation po
+        on co.parent_id = po.id
+        LEFT JOIN course_activity ca
+        on c.id = ca.course_id
+        LEFT JOIN course_section cs
+        on cs.course_id = c.id
+        LEFT JOIN course_lesson cl
+        on cl.section_id = cs.id
+        LEFT JOIN course_media cm
+        on cm.lesson_id = cl.id
+        where 1=1
+        <if test="orientationName !=''and subOrientationName !='' ">
+            and po.orientation_name =#{subOrientationName}
+        </if>
+        <if test="orientationName !='' and subOrientationName ==''">
+            and co.orientation_name =#{orientationName}
+        </if>
+        <if test="typeName != null and typeName !=''">
+            and ct.type_name =#{typeName}
+        </if>
+        <if test="courseName !=''">
+            and c.course_name like concat('%', #{courseName}, '%' )
+        </if>
+        <if test="field !='' and field=='price' and type=='asc' ">
+            Order by c.price asc
+        </if>
+        <if test="field !='' and field=='price' and type=='desc' ">
+            Order by c.price desc
+        </if>
+        <if test="field !='' and field=='createTime' and type=='desc' ">
+            Order by c.create_time desc
+        </if>
+        <if test="field !='' and field=='createTime' and type=='asc' ">
+            Order by c.create_time asc
+        </if>
+        <if test="field !='' and field=='sales' and type=='asc' ">
+            Order by c.sales asc
+        </if>
+        <if test="field !='' and field=='sales' and type=='desc' ">
+            Order by c.sales desc
+        </if>
+        limit  ${current * size},5;
+    </select>
+
+
+
+
+    <select id="selectAllCourses" resultMap="courseMap">
+        select c.id c_id,course_name,brief,price,price_tag,discounts,discounts_tag,course_description_mark_down,course_description,course_img_url,is_new,is_new_des,last_operator_id,auto_online_time, c.create_time c_create_time,c.update_time c_update_time,c.is_del c_is_del,total_duration,c.`status` c_status,sort_num,preview_first_field,preview_second_field,sales,type_id,orientation_id,teacher_id,
+
+               t.id t_id,t.teacher_name,t.position t_position,t.description t_description,t.create_time t_create_time,t.update_time t_update_time,t.is_del t_is_del,
+
+               ct.id ct_id,ct.type_name,
+
+               co.id co_id,co.orientation_name co_orientation_name,co.parent_id co_parent_id,
+
+               po.id po_id,po.orientation_name po_orientation_name,po.parent_id po_parent_id,
+
+               ca.id ca_id,ca.course_id ca_course_id,ca.begin_time ca_begin_time,ca.end_time ca_end_time,ca.amount,ca.stock,ca.`status` ca_status,ca.is_del ca_is_del,ca.remark,ca.create_time ca_create_time,ca.update_time ca_update_time,
+
+               cs.id cs_id,cs.course_id cs_course_id,cs.section_name,cs.description,cs.create_time cs_create_time,cs.update_time cs_update_time,cs.is_del cs_is_del,cs.order_num cs_order_num,cs.`status` cs_status,
+
+               cl.id cl_id,cl.course_id cl_course_id,cl.section_id cl_section_id,cl.theme,cl.duration cl_duration,cl.is_free,cl.create_time cl_create_time,cl.update_time cl_update_time,cl.is_del cl_is_del,cl.order_num cl_order_num,cl.`status` cl_status,
+
+               cm.id cm_id,cm.course_id cm_course_id,cm.section_id cm_section_id,cm.lesson_id cm_lesson_id,cm.cover_image_url,
+               cm.duration cm_duration,cm.file_edk,cm.file_size,cm.file_name,cm.file_dk,cm.create_time cm_create_time,cm.update_time cm_update_time,cm.is_del cm_is_del,cm.duration_num cm_duration_num,cm.file_id cm_file_id
+
+        from course c
+                 left JOIN teacher t
+                           on c.teacher_id = t.id
+                 LEFT JOIN course_type ct
+                           on c.type_id = ct.id
+                 LEFT JOIN course_orientation co
+                           on c.orientation_id = co.id
+                 LEFT JOIN course_orientation po
+                           on co.parent_id = po.id
+                 LEFT JOIN course_activity ca
+                           on c.id = ca.course_id
+                 LEFT JOIN course_section cs
+                           on cs.course_id = c.id
+                 LEFT JOIN course_lesson cl
+                           on cl.section_id = cs.id
+                 LEFT JOIN course_media cm
+                           on cm.lesson_id = cl.id
+    </select>
+
+    <select id="selectCourseById" parameterType="java.lang.Integer" resultType="Course">
+        select * from course where id = #{id};
+    </select>
+
+
+
+
+
+
+
+
+
+    <select id="selectCoursesByIds" parameterType="java.util.List" resultMap="courseMap">
+        select c.id c_id,course_name,brief,price,price_tag,discounts,discounts_tag,course_description_mark_down,course_description,course_img_url,is_new,is_new_des,last_operator_id,auto_online_time, c.create_time c_create_time,c.update_time c_update_time,c.is_del c_is_del,total_duration,c.`status` c_status,sort_num,preview_first_field,preview_second_field,sales,type_id,orientation_id,teacher_id,
+
+               t.id t_id,t.teacher_name,t.position t_position,t.description t_description,t.create_time t_create_time,t.update_time t_update_time,t.is_del t_is_del,
+
+               ct.id ct_id,ct.type_name,
+
+               co.id co_id,co.orientation_name co_orientation_name,co.parent_id co_parent_id,
+
+               po.id po_id,po.orientation_name po_orientation_name,po.parent_id po_parent_id,
+
+               ca.id ca_id,ca.course_id ca_course_id,ca.begin_time ca_begin_time,ca.end_time ca_end_time,ca.amount,ca.stock,ca.`status` ca_status,ca.is_del ca_is_del,ca.remark,ca.create_time ca_create_time,ca.update_time ca_update_time,
+
+               cs.id cs_id,cs.course_id cs_course_id,cs.section_name,cs.description,cs.create_time cs_create_time,cs.update_time cs_update_time,cs.is_del cs_is_del,cs.order_num cs_order_num,cs.`status` cs_status,
+
+               cl.id cl_id,cl.course_id cl_course_id,cl.section_id cl_section_id,cl.theme,cl.duration cl_duration,cl.is_free,cl.create_time cl_create_time,cl.update_time cl_update_time,cl.is_del cl_is_del,cl.order_num cl_order_num,cl.`status` cl_status,
+
+               cm.id cm_id,cm.course_id cm_course_id,cm.section_id cm_section_id,cm.lesson_id cm_lesson_id,cm.cover_image_url,
+               cm.duration cm_duration,cm.file_edk,cm.file_size,cm.file_name,cm.file_dk,cm.create_time cm_create_time,cm.update_time cm_update_time,cm.is_del cm_is_del,cm.duration_num cm_duration_num,cm.file_id cm_file_id
+
+        from course c
+                 left JOIN teacher t
+                           on c.teacher_id = t.id
+                 LEFT JOIN course_type ct
+                           on c.type_id = ct.id
+                 LEFT JOIN course_orientation co
+                           on c.orientation_id = co.id
+                 LEFT JOIN course_orientation po
+                           on co.parent_id = po.id
+                 LEFT JOIN course_activity ca
+                           on c.id = ca.course_id
+                 LEFT JOIN course_section cs
+                           on cs.course_id = c.id
+                 LEFT JOIN course_lesson cl
+                           on cl.section_id = cs.id
+                 LEFT JOIN course_media cm
+                           on cm.lesson_id = cl.id
+
+        WHERE c.id IN
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+        #{id}
+        </foreach>
+    </select>
+</mapper>

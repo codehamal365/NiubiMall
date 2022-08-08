@@ -1,0 +1,41 @@
+server:
+  port: 8009
+spring:
+  application:
+    name: comment-service
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080 # sentinel ??????
+        port: 8719  # sentinel???
+    nacos:
+      discovery:
+        server-addr: 192.168.86.88:8848
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/edu_comment?serverTimezone=UTC&allowMultiQueries=true&useAffectedRows=true
+    username: root
+    password: root
+
+
+
+
+mybatis:
+  type-aliases-package: com.gl.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mybatis-plus:
+  type-aliases-package: com.gl.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+
+

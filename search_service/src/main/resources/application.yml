@@ -1,0 +1,46 @@
+spring:
+  redis:
+    host: 192.168.86.88
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: 100ms
+        max-idle: 100
+        min-idle: 10
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guolong
+    password: 123456
+    virtual-host: myHost
+    listener:
+      simple:
+        acknowledge-mode: manual  # 消费者手动确认
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/edu_course?serverTimezone=UTC&allowMultiQueries=true&useAffectedRows=true
+    username: root
+    password: root
+
+  application:
+    name: search-service
+  elasticsearch:
+    rest:
+      uris: localhost:9200
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.86.88:8848
+server:
+  port: 8006
+
+mybatis-plus:
+  type-aliases-package: com.gl.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

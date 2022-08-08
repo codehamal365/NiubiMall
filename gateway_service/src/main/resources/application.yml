@@ -1,0 +1,66 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.86.88:8848
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            #????allowCredentials: true?????????????cookie?????????????
+            allowedOrigins: "*"
+            allowCredentials: true
+            #?????????","?? ???"http://www.xiaolc.cn,https://spring.io"  "*"??????
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: ad-service-rounter
+          uri: lb://ad-service
+          predicates:
+            - Path=/PromotionAds/**,/PromotionAd/**,/ad/**
+        - id: course-service-rounter
+          uri: lb://course-service
+          predicates:
+            - Path=/course-types/**,/course-orientations,/course-orientations/parent/**,/course/getMyCoursesById,/course/sale/**
+        - id: search-service-rounter
+          uri: lb://search-service
+          predicates:
+            - Path=/search-courses,/course/init
+        - id: user-service-rounter
+          uri: lb://user-service
+          predicates:
+            - Path=/login,/course-upload,/updateUser,/checkUsername,/updatePassword,/register
+        - id: order-service-rounter
+          uri: lb://order-service
+          predicates:
+            - Path=/wxPay/**,/qrCode,/wxpay/checkorder/**,/order/getOKOrderCourseIds/**
+        - id: comment-service-rounter
+          uri: lb://comment-service
+          predicates:
+            - Path=/course/comment/getCourseCommentList/**,/course/comment/saveCourseComment,/course/comment/saveFavorite/**
+
+learn:
+  gateway:
+    white-list:
+      - /login
+      - /qrCode
+      - /register
+      - /course-upload
+      - /course-types
+      - /order/getOKOrderCourseIds
+      - /course-orientations
+      - /search-courses
+      - /checkUsername
+      - /search-courses
+      - /ad
+      - /course-orientations
+      - /course-types
+      - /callback
+      - /wxpay/code
+      - /course-orientations/parent

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gl.mapper.OrderMapper">
+
+    <insert id="insertOrder" parameterType="com.gl.entity.UserCourseOrder"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into user_course_order(user_id,course_id,status,create_time,update_time,is_del,trade_no,pay_type_id,price)
+        values(#{userId},#{courseId},#{status},#{createTime},#{updateTime},#{isDel},#{tradeNo},#{payTypeId},#{price})
+    </insert>
+
+    <select id="selectOrdersByIds" resultType="com.gl.entity.UserCourseOrder">
+        select * from user_course_order where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

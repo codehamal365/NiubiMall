@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gl.mapper.CourseCommentMapper">
+    <resultMap type="com.gl.entity.CourseComment" id="commentMap">
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
+        <result property="sectionId" column="section_id" jdbcType="INTEGER"/>
+        <result property="lessonId" column="lesson_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="isTop" column="is_top" jdbcType="OTHER"/>
+        <result property="comment" column="comment" jdbcType="VARCHAR"/>
+        <result property="likeCount" column="like_count" jdbcType="INTEGER"/>
+        <result property="isReply" column="is_reply" jdbcType="OTHER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDel" column="is_del" jdbcType="OTHER"/>
+        <result property="lastOperator" column="last_operator" jdbcType="INTEGER"/>
+        <result property="isNotify" column="is_notify" jdbcType="OTHER"/>
+        <result property="markBelong" column="mark_belong" jdbcType="OTHER"/>
+        <result property="replied" column="replied" jdbcType="OTHER"/>
+        <collection property="favoriteRecords" javaType="java.util.List" column="id" ofType="com.gl.entity.CourseCommentFavoriteRecord"
+        select="com.gl.mapper.CourseCommentFavoriteRecordMapper.selectFavoriteByCommentId">
+
+        </collection>
+    </resultMap>
+
+    <select id="getCommentsByCourseId" resultMap="commentMap">
+        select * from course_comment
+        where is_del = 0
+          and course_id = #{courseid}
+        order by is_top desc , like_count desc , create_time desc
+            limit #{offset}, #{pageSize}
+    </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/NiubiMall.iml" filepath="$PROJECT_DIR$/.idea/NiubiMall.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ad_service/ad_service.iml" filepath="$PROJECT_DIR$/ad_service/ad_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comment_service/comment_service.iml" filepath="$PROJECT_DIR$/comment_service/comment_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/course_service/course_service.iml" filepath="$PROJECT_DIR$/course_service/course_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/danmu_service/danmu_service.iml" filepath="$PROJECT_DIR$/danmu_service/danmu_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway_service/gateway_service.iml" filepath="$PROJECT_DIR$/gateway_service/gateway_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order_service/order_service.iml" filepath="$PROJECT_DIR$/order_service/order_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search_service/search_service.iml" filepath="$PROJECT_DIR$/search_service/search_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user_service/user_service.iml" filepath="$PROJECT_DIR$/user_service/user_service.iml" />
+    </modules>
+  </component>
+</project>

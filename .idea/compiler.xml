@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="user_service" />
+        <module name="order_service" />
+        <module name="comment_service" />
+        <module name="ad_service" />
+        <module name="danmu_service" />
+        <module name="search_service" />
+        <module name="course_service" />
+        <module name="gateway_service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ad_service" target="1.8" />
+      <module name="comment_service" target="1.8" />
+      <module name="course_service" target="1.8" />
+      <module name="danmu_service" target="1.8" />
+      <module name="gateway_service" target="1.8" />
+      <module name="NiubiMall" target="1.8" />
+      <module name="order_service" target="1.8" />
+      <module name="search_service" target="1.8" />
+      <module name="user_service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ad_service" options="-parameters" />
+      <module name="comment_service" options="-parameters" />
+      <module name="course_service" options="-parameters" />
+      <module name="danmu_service" options="-parameters" />
+      <module name="gateway_service" options="-parameters" />
+      <module name="order_service" options="-parameters" />
+      <module name="search_service" options="-parameters" />
+      <module name="user_service" options="-parameters" />
+    </option>
+  </component>
+</project>
